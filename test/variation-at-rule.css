@@ -18,3 +18,8 @@
     background: yellow;
   }
 }
+@--variation 2, four {
+  body {
+    color: purple;
+  }
+}

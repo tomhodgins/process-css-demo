@@ -10,8 +10,9 @@ module.exports = function(string = '', environment = {}) {
 
         // Output rule if variation is active
         if (
-          rule.prelude.map(({value}) => value).join('').trim()
-          === String(environment.variation).trim()
+          rule.prelude
+            .filter(({value}) => value)
+            .some(({value}) => String(environment.variation) === String(value))
         ) {
           output.css += parseCSS.parseAListOfRules(rule.value.value)
             .map(rule => rule.toSource())
