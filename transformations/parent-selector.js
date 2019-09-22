@@ -15,7 +15,7 @@ module.exports = function(string = '', environment = {}) {
 
       if (
         rule.type === 'QUALIFIED-RULE'
-        && match.match
+        && match.match.length
       ) {
 
         // Add dependencies to output

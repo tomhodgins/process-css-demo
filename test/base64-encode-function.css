@@ -1,0 +1,9 @@
+unquoted url {
+  background: --base64-encode(woolly-icon.png);
+}
+single quoted url {
+  background: --base64-encode('woolly-icon.png');
+}
+double quoted url {
+  background: --base64-encode("woolly-icon.png");
+}

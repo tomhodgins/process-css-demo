@@ -1,0 +1,9 @@
+unquoted url {
+  background: --svg-encode(woolly-icon.svg);
+}
+single quoted url {
+  background: --svg-encode('woolly-icon.svg');
+}
+double quoted url {
+  background: --svg-encode("woolly-icon.svg");
+}

@@ -1,0 +1,20 @@
+@--variation 1 {
+  :root {
+    background: red;
+  }
+}
+@--variation "2" {
+  :root {
+    background: green;
+  }
+}
+@--variation three {
+  :root {
+    background: blue;
+  }
+}
+@--variation 'four' {
+  :root {
+    background: yellow;
+  }
+}

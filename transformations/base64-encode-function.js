@@ -21,7 +21,11 @@ module.exports = function(string = '', environment = {}) {
           type === 'FUNCTION'
           && name === '--base64-encode'
         ).forEach((token, index, list) => {
-          const filename = JSON.parse(token.value.map(token => token.toSource()).join(''))
+          const filename = token.value.map(({tokenType, value}) =>
+            tokenType === 'STRING'
+              ? JSON.parse(JSON.stringify(value))
+              : value
+          ).join('')
           const extension = token.value[token.value.length - 1]
 
           if (fs.existsSync(`${environment.cssDir}/${filename}`)) {

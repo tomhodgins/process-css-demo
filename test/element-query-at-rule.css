@@ -1,0 +1,5 @@
+@--element div and (min-width: 800) {
+  :--self {
+    background: lime;
+  }
+}
