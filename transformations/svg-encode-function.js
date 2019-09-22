@@ -16,7 +16,7 @@ module.exports = function(string = '', environment = {}) {
         ).length
       ) {
 
-        // Replace --base64(<url to image>) with url(<base64'd content of file>)
+        // Replace --svg-encode(<url to image>) with url(<encoded content of SVG file>)
         rule.value.value.filter(({type, name}) =>
           type === 'FUNCTION'
           && name === '--svg-encode'
