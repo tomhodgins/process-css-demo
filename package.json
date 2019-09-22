@@ -1,0 +1,34 @@
+{
+  "name": "process-css-node-demo",
+  "version": "1.0.0",
+  "description": "A demo of process-css for processing CSS",
+  "main": "index.js",
+  "bin": {
+    "preprocess": "index.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "process",
+    "css",
+    "preprocess",
+    "js",
+    "runtime",
+    "cssom"
+  ],
+  "author": "Tommy Hodgins",
+  "license": "MIT",
+  "dependencies": {
+    "apophany": "0.0.1",
+    "jsincss": "^2.2.2",
+    "jsincss-element-query": "^2.2.0",
+    "jsincss-element-units": "^2.0.3",
+    "jsincss-parent-selector": "^2.0.2",
+    "path": "^0.12.7",
+    "process-css": "^0.2.1"
+  }
+}

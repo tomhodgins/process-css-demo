@@ -1,0 +1,8 @@
+div {
+  background: red;
+}
+@--custom {
+  div {
+    background: lime;
+  }
+}
