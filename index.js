@@ -125,7 +125,7 @@ if (fs.existsSync(options.file)) {
 const environment = Object.assign(
   {
     cssDir: fs.existsSync(options.file)
-      ? path.dirname(options.filename)
+      ? path.dirname(options.filename || './')
       : process.cwd()
   },
   options.data || {}
@@ -234,3 +234,9 @@ if (
 } else if (options.helpMode === true) {
   console.log(helpMessage())
 }
+
+/*
+process.stdin.on('data', function (data) {
+  console.log(data)
+})
+*/
