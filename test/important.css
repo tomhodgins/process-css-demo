@@ -1,0 +1,9 @@
+@--important {
+  h1 {
+    color: red;
+    background: green !important;
+  }
+  h2 {
+    border-color: blue;
+  }
+}

@@ -2,6 +2,7 @@ const resetAtRule = require('./transformations/reset-at-rule')
 const elementQueryAtRule = require('./transformations/element-query-at-rule')
 const documentAtRule = require('./transformations/document-at-rule')
 const variationAtRule = require('./transformations/variation-at-rule')
+const importantAtRule = require('./transformations/important-at-rule')
 const parentSelector = require('./transformations/parent-selector')
 const clampedFontSizeProperty = require('./transformations/clamped-font-size-property')
 const base64EncodeFunction = require('./transformations/base64-encode-function')
@@ -14,14 +15,17 @@ module.exports = [
     // @--reset selector;
     resetAtRule,
 
-    // @--element selector and (condition: breakpoint) { stylesheet {} }
+    // @--element selector and (condition: breakpoint) { stylesheet }
     elementQueryAtRule,
 
-    // @--document condition(string) { stylesheet {} }
+    // @--document condition(string) { stylesheet }
     documentAtRule,
 
-    // @--variation value { stylesheet {} }
+    // @--variation value { stylesheet }
     variationAtRule,
+
+    // @--important { stylesheet }
+    importantAtRule,
 
   // Custom selectors
 
