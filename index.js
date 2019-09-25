@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+// dependencies
 const fs = require('fs')
 const path = require('path')
 const processCSS = require('process-css')
@@ -9,28 +10,27 @@ const postcss = require('postcss')
 const cssnano = require('cssnano')
 const terser = require('terser')
 
-// Load out transformations
+// our CSS transformations
 const transformations = require('./transformations.js')
 
-// Options
 const options = {
   file: '',
-  css: false,       // -c or --css to output CSS only
-  data: null,       // -d or --data to supply data as JSON-parsable string
-  minify: false,    // -m or --minify to enable code minification
-  beautify: false,  // -b or --beautify to enable code beautification
-  helpMode: false   // -h or --help to output help text
+  css: false,
+  data: null,
+  minify: false,
+  beautify: false,
+  helpMode: false
 }
 
-// Argument parsing from command-line input
+// Parse arguments from command-line input
 process.argv.slice(2).forEach((arg, index, list) => {
 
-  // First argument is always our stylesheet's file path
+  // First argument is our stylesheet or path to a stylesheet
   if (index === 0) {
     options.file = arg
   }
 
-  // -c or --css to output CSS only
+  // -c or --css to select CSS output
   if (
     ['-c', '--css'].some(term => term === arg)
   ) {
@@ -61,7 +61,7 @@ process.argv.slice(2).forEach((arg, index, list) => {
     options.beautify = true
   }
 
-  // -h or --help to output help text, or no args given
+  // -h or --help to output help text
   if (['-h', '--help'].some(term => term === arg)) {
     options.helpMode = true
   }
@@ -73,6 +73,7 @@ if (process.argv.slice(2).length === 0) {
 }
 
 const helpMessage = () => `
+
 Process CSS Demo
 
 About:
@@ -81,41 +82,42 @@ This is a simple CSS preprocessor, supporting CSS and JS output
 
 Usage:
 
-    node index.js <stylesheet> <options>
+  node index.js <stylesheet> <options>
 
 Options:
 
 -c, --css         output CSS only
--d, --data        supply data as JSON-parsable string
 -m, --minify      enable code minification
 -b, --beautify    enable code beautification
+-d, --data        supply data to preprocessor as JSON-parsable string
 -h, --help        display this help message
 
 Examples:
 
-    # process styles.css
-    $ node index.js styles.css
+  # process a stylesheet
+  $ node index.js styles.css
 
-    # CSS-only output
-    $ node index.js styles.css -c
+  # choose CSS-only output
+  $ node index.js styles.css -c
 
-    # beautify JS output
-    $ node index.js styles.css -b
+  # beautify JS output
+  $ node index.js styles.css -b
 
-    # minify CSS-only output
-    $ node index.js styles.css -c -m
+  # minify CSS-only output
+  $ node index.js styles.css -c -m
 
-    # load external data as JSON
-    $ node index.js -d '{"variation": 1}'
+  # load external data as JSON
+  $ node index.js -d '{"variation": 1}'
+
+  # use string of CSS
+  $ node index.js '@--reset' --css --beautify
 `
 
 let css = ''
 
 // Try to load CSS stylesheet
 if (fs.existsSync(options.file)) {
-  css = fs.readFileSync(
-    process.argv[2]
-  ).toString()
+  css = fs.readFileSync(options.file).toString()
 } else if (options.file.length) {
   css = options.file
 } else if (options.helpMode === false) {
@@ -125,7 +127,7 @@ if (fs.existsSync(options.file)) {
 const environment = Object.assign(
   {
     cssDir: fs.existsSync(options.file)
-      ? path.dirname(options.filename || './')
+      ? path.dirname(options.file || './')
       : process.cwd()
   },
   options.data || {}
@@ -150,6 +152,18 @@ if (
   )
 ) {
 
+  if (options.beautify === true) {
+    processed.css = prettier.format(
+      processed.css,
+      {
+        tabs: false,
+        tabWidth: 2,
+        singleQuote: true,
+        parser: 'css'
+      }
+    )
+  }
+
   if (options.css === true) {
 
     if (options.minify === true) {
@@ -157,18 +171,6 @@ if (
         .process(css, {from: '', to: ''})
         .then(result => console.log(result.css))
     } else {
-
-      if (options.beautify === true) {
-        processed.css = prettier.format(
-          processed.css,
-          {
-            tabs: false,
-            tabWidth: 2,
-            singleQuote: true,
-            parser: 'css'
-          }
-        )
-      }
 
       console.log(processed.css)
     }
@@ -234,9 +236,3 @@ if (
 } else if (options.helpMode === true) {
   console.log(helpMessage())
 }
-
-/*
-process.stdin.on('data', function (data) {
-  console.log(data)
-})
-*/

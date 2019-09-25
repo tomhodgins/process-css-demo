@@ -8,6 +8,7 @@ const clampedFontSizeProperty = require('./transformations/clamped-font-size-pro
 const base64EncodeFunction = require('./transformations/base64-encode-function')
 const svgEncodeFunction = require('./transformations/svg-encode-function')
 const elementPercentageUnits = require('./transformations/element-percentage-units')
+const scrollUnits = require('./transformations/scroll-units')
 
 module.exports = [
   // Custom at-rules
@@ -48,5 +49,8 @@ module.exports = [
   // Custom units
 
     // 1--ew 2--eh 3--emin 4--emax
-    elementPercentageUnits
+    elementPercentageUnits,
+
+    // 1--sw 2--sh
+    scrollUnits,
 ]

@@ -1,5 +1,26 @@
 const parseCSS = require('../lib/parse-css.js')
-const eunits = require('jsincss-element-units')
+
+// --sw, --sh
+function scrollUnits(selector, rule) {
+  const attr = selector.replace(/\W/g, '')
+  const features = {
+    'sw': (tag, number) => tag.scrollWidth / 100 * number + 'px',
+    'sh': (tag, number) => tag.scrollHeight / 100 * number + 'px'
+  }
+  const result = Array.from(document.querySelectorAll(selector))
+    .reduce((output, tag, count) => {
+      rule = rule.replace(
+        /(\d*\.?\d+)(?:\s*)--(sw|sh)/gi,
+        (match, number, unit) => features[unit](tag, number)
+      )
+      output.add.push({tag, count})
+      output.styles.push(`[data-scroll-unit-${attr}="${count}"] { ${rule} }`)
+      return output
+    }, {add: [], remove: [], styles: []})
+  result.add.forEach(tag => tag.tag.setAttribute(`data-scroll-unit-${attr}`, tag.count))
+  result.remove.forEach(tag => tag.setAttribute(`data-scroll-unit-${attr}`, ''))
+  return result.styles.join('\n')
+}
 
 module.exports = function(string = '', environment = {}) {
   return parseCSS.parseAStylesheet(string).value.reduce(
@@ -10,7 +31,7 @@ module.exports = function(string = '', environment = {}) {
           rule.value.value.map(token => token.toSource()).join('')
         ).filter(({value}) => value.some(({tokenType, unit}) =>
           tokenType === 'DIMENSION'
-          && ['w', 'h', 'min', 'max'].some(term => `--e${term}` === unit)
+          && ['w', 'h'].some(term => `--s${term}` === unit)
         )).length
       ) {
         const unit = {
@@ -33,38 +54,28 @@ module.exports = function(string = '', environment = {}) {
           ).filter(
             ({value}) => value.find(({tokenType, unit}) =>
               tokenType === 'DIMENSION'
-              && ['w', 'h', 'min', 'max'].some(term => `--e${term}` === unit)
+              && ['w', 'h'].some(term => `--s${term}` === unit)
               === false
             )
           ).map(token => token.toSource()).join('; ')
         }}`
 
         // Add dependencies to output
-        output.otherFiles['elementPercentageUnits'] = eunits.toString()
+        output.otherFiles['scrollUnits'] = scrollUnits.toString()
 
         // Add rules to output JS
-        output.js += `elementPercentageUnits(\`${unit.selector}\`, \`${
+        output.js += `scrollUnits(\`${unit.selector}\`, \`${
           parseCSS.parseAListOfDeclarations(
             rule.value.value.map(token => token.toSource()).join('')
           ).filter(
             ({value}) => value.find(({tokenType, unit}) =>
               tokenType === 'DIMENSION'
-              && ['w', 'h', 'min', 'max'].some(term => `--e${term}` === unit)
+              && ['w', 'h'].some(term => `--s${term}` === unit)
             )
-          ).map(declaration => {
-
-            // Reformat unit for runtime plugin
-            declaration.value
-              .filter(({unit}) => unit)
-              .forEach(token => {
-                token.unit = token.unit.replace(/^--/, '')
-                return token
-              })
-            
-            // Stringify declaration
-            return declaration.toSource()
-          }).join(';')
+          ).map(declaration => declaration.toSource())
+          .join(';')
         }\`),`
+
       } else {
         output.css += rule.toSource()
       }
