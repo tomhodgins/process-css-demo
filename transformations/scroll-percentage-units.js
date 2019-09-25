@@ -1,7 +1,7 @@
 const parseCSS = require('../lib/parse-css.js')
 
 // --sw, --sh
-function scrollUnits(selector, rule) {
+function scrollPercentageUnits(selector, rule) {
   const attr = selector.replace(/\W/g, '')
   const features = {
     'sw': (tag, number) => tag.scrollWidth / 100 * number + 'px',
@@ -61,10 +61,10 @@ module.exports = function(string = '', environment = {}) {
         }}`
 
         // Add dependencies to output
-        output.otherFiles['scrollUnits'] = scrollUnits.toString()
+        output.otherFiles['scrollPercentageUnits'] = scrollPercentageUnits.toString()
 
         // Add rules to output JS
-        output.js += `scrollUnits(\`${unit.selector}\`, \`${
+        output.js += `scrollPercentageUnits(\`${unit.selector}\`, \`${
           parseCSS.parseAListOfDeclarations(
             rule.value.value.map(token => token.toSource()).join('')
           ).filter(
