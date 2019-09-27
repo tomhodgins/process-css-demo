@@ -6,12 +6,7 @@ module.exports = function(string = '', environment = {}) {
     (output, rule) => {
       if (
         rule.type === 'QUALIFIED-RULE'
-        && parseCSS.parseAListOfDeclarations(
-          rule.value.value.map(token => token.toSource()).join('')
-        ).filter(({value}) => value.some(({tokenType, unit}) =>
-          tokenType === 'DIMENSION'
-          && ['w', 'h', 'min', 'max'].some(term => `--e${term}` === unit)
-        )).length
+        && rule.toSource().match(/[\d.]--e(w|h|min|max)/)
       ) {
         const unit = {
           selector: '',
@@ -30,12 +25,8 @@ module.exports = function(string = '', environment = {}) {
         } {${
           parseCSS.parseAListOfDeclarations(
             rule.value.value.map(token => token.toSource()).join('')
-          ).filter(
-            ({value}) => value.find(({tokenType, unit}) =>
-              tokenType === 'DIMENSION'
-              && ['w', 'h', 'min', 'max'].some(term => `--e${term}` === unit)
-              === false
-            )
+          ).filter(declaration => 
+            declaration.toSource().match(/[\d.]--e(w|h|min|max)/) === null
           ).map(token => token.toSource()).join('; ')
         }}`
 
@@ -46,11 +37,8 @@ module.exports = function(string = '', environment = {}) {
         output.js += `elementPercentageUnits(\`${unit.selector}\`, \`${
           parseCSS.parseAListOfDeclarations(
             rule.value.value.map(token => token.toSource()).join('')
-          ).filter(
-            ({value}) => value.find(({tokenType, unit}) =>
-              tokenType === 'DIMENSION'
-              && ['w', 'h', 'min', 'max'].some(term => `--e${term}` === unit)
-            )
+          ).filter(declaration => 
+            declaration.toSource().match(/[\d.]--e(w|h|min|max)/)
           ).map(declaration => {
 
             // Reformat unit for runtime plugin
