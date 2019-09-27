@@ -27,7 +27,7 @@
     "cssnano": "^4.1.10",
     "jsincss": "^2.2.2",
     "jsincss-element-query": "^2.2.0",
-    "jsincss-element-units": "^2.0.3",
+    "jsincss-element-units": "^2.1.0",
     "jsincss-parent-selector": "^2.0.2",
     "path": "^0.12.7",
     "postcss": "^7.0.18",
