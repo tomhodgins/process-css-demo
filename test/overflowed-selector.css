@@ -1,0 +1,46 @@
+.overflow {
+  margin: 1em;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid;
+}
+.overflow pre {
+  margin: 0;
+  padding: 2em;
+  white-space: pre;
+  overflow: auto;
+  overflow-x: scroll;
+}
+.overflow .left,
+.overflow .right {
+  display: block;
+  width: 50px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s ease-in-out;
+}
+.overflow .left {
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,.3) 0%,
+    rgba(0,0,0,0) 100%
+  );
+}
+.overflow .right {
+  right: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.3) 100%
+  );
+}
+.overflow pre:--overflowed(left) ~ .left {
+  opacity: 1
+}
+.overflow pre:--overflowed(right) ~ .right {
+  opacity: 1
+}

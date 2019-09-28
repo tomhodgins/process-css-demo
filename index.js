@@ -147,8 +147,13 @@ if (css.length) {
 if (
   options.helpMode === false
   && (
-    processed.css.length
-    || processed.js.length
+    processed
+    && (
+      processed.css
+      && processed.css.length
+      || processed.js
+      && processed.js.length
+    )
   )
 ) {
 

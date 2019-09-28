@@ -4,6 +4,7 @@ const documentAtRule = require('./transformations/document-at-rule')
 const variationAtRule = require('./transformations/variation-at-rule')
 const importantAtRule = require('./transformations/important-at-rule')
 const parentSelector = require('./transformations/parent-selector')
+const overflowedContentSelector = require('./transformations/overflowed-content-selector')
 const clampedFontSizeProperty = require('./transformations/clamped-font-size-property')
 const base64EncodeFunction = require('./transformations/base64-encode-function')
 const svgEncodeFunction = require('./transformations/svg-encode-function')
@@ -32,6 +33,9 @@ module.exports = [
 
     // :--parent
     parentSelector,
+
+    // :--overflowed()
+    overflowedContentSelector,
 
   // Custom properties
 
