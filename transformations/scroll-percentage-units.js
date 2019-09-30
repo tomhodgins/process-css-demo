@@ -14,7 +14,7 @@ function scrollPercentageUnits(selector, rule) {
         (match, number, unit) => features[unit](tag, number)
       )
       output.add.push({tag, count})
-      output.styles.push(`[data-scroll-unit-${attr}="${count}"] { ${rule} }`)
+      output.styles.push(`${selector}[data-scroll-unit-${attr}="${count}"] { ${rule} }`)
       return output
     }, {add: [], remove: [], styles: []})
   result.add.forEach(tag => tag.tag.setAttribute(`data-scroll-unit-${attr}`, tag.count))
