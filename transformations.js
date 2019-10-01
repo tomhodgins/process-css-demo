@@ -4,10 +4,10 @@ const documentAtRule = require('./transformations/document-at-rule')
 const variationAtRule = require('./transformations/variation-at-rule')
 const importantAtRule = require('./transformations/important-at-rule')
 const hasElementSelector = require('./transformations/has-element-selector')
-const parentSelector = require('./transformations/parent-selector')
+const parentCombinator = require('./transformations/parent-combinator')
 const stringMatchingSelector = require('./transformations/string-matching-selector')
 const regexMatchingSelector = require('./transformations/regex-matching-selector')
-const previousSiblingSelector = require('./transformations/previous-sibling-selector')
+const previousSiblingCombinator = require('./transformations/previous-sibling-combinator')
 const overflowedContentSelector = require('./transformations/overflowed-content-selector')
 const clampedFontSizeProperty = require('./transformations/clamped-font-size-property')
 const base64EncodeFunction = require('./transformations/base64-encode-function')
@@ -36,10 +36,10 @@ module.exports = [
   // Custom selectors
 
     // :--parent
-    parentSelector,
+    parentCombinator,
 
     // :--previous
-    previousSiblingSelector,
+    previousSiblingCombinator,
 
     // :--has()
     hasElementSelector,

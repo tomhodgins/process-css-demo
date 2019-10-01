@@ -1,6 +1,6 @@
 const parseCSS = require('../lib/parse-css.js')
 const pattern = require('apophany/index.cjs.js')
-const previous = require('jsincss-previous-selector')
+const parent = require('jsincss-parent-selector')
 
 module.exports = function(string = '', environment = {}) {
   return parseCSS.parseAStylesheet(string).value.reduce(
@@ -8,8 +8,9 @@ module.exports = function(string = '', environment = {}) {
       const match = pattern(
         rule.prelude,
         [
-          ({tokenType}) => tokenType === ':',
-          ({tokenType, value}) => tokenType === 'IDENT' && value === '--previous'
+          ({tokenType, value}) => tokenType === 'DELIM' && value === '/',
+          ({tokenType, value}) => tokenType === 'IDENT' && value === '--parent',
+          ({tokenType, value}) => tokenType === 'DELIM' && value === '/'
         ]
       )
 
@@ -19,10 +20,10 @@ module.exports = function(string = '', environment = {}) {
       ) {
 
         // Add dependencies to output
-        output.otherFiles['previousSiblingSelector'] = previous.toString()
+        output.otherFiles['parentCombinator'] = parent.toString()
 
         // Add rules to output JS
-        output.js += `previousSiblingSelector(${
+        output.js += `parentCombinator(${
           JSON.stringify(
             rule.prelude
               .slice(0, match.start)

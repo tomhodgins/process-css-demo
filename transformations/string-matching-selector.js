@@ -38,7 +38,7 @@ module.exports = function(string = '', environment = {}) {
         output.js += `stringMatchingSelector(${
           JSON.stringify(selector || '*')
         }, ${
-          JSON.stringify(term)
+          term
         }, ${
           JSON.stringify(
             rule.value.value

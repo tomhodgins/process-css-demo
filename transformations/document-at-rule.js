@@ -39,11 +39,9 @@ module.exports = function(string = '', environment = {}) {
           && ['url', 'url-prefix', 'domain', 'regexp'].some(term => term === name)
         ).map(({name, value}) => {
           const condition = {}
-          condition[kebabToCamel(name)] = value.map(({tokenType, value}) =>
-            tokenType === 'STRING'
-              ? JSON.parse(JSON.stringify(value))
-              : value
-          ).join('')
+          condition[kebabToCamel(name)] = value
+            .map(token => JSON.parse(token.toSource()))
+            .join('')
           return condition
         })
 
