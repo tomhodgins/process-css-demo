@@ -23,7 +23,7 @@ module.exports = function(string = '', environment = {}) {
 
       if (
         rule.type === 'QUALIFIED-RULE'
-        && match.match.length
+        && match.start >= 0
       ) {
 
         // Add dependencies to output
