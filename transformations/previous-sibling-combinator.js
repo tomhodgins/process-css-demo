@@ -2,13 +2,6 @@ const parseCSS = require('../lib/parse-css.js')
 const pattern = require('apophany/index.cjs.js')
 const previous = require('jsincss-previous-selector')
 
-/*
-
-/--previous/
-
-*/
-
-
 module.exports = function(string = '', environment = {}) {
   return parseCSS.parseAStylesheet(string).value.reduce(
     (output, rule) => {
@@ -36,6 +29,7 @@ module.exports = function(string = '', environment = {}) {
               .slice(0, match.start)
               .map(token => token.toSource())
               .join('')
+              .trim()
             || '*'
           )
         }, ${
@@ -43,6 +37,7 @@ module.exports = function(string = '', environment = {}) {
             rule.value.value
               .map(token => token.toSource())
               .join('')
+              .trim()
           )
         }),`
       } else {

@@ -12,7 +12,14 @@ module.exports = function(string = '', environment = {}) {
         if (
           rule.prelude
             .filter(({value}) => value)
-            .some(({value}) => String(environment.variation) === String(value))
+            .some(({value}) => {
+              try {
+                return String(JSON.parse(environment.variation)) === String(value)
+              }
+              catch (error) {
+                return String(environment.variation) === String(value)
+              }
+            })
         ) {
           output.css += parseCSS.parseAListOfRules(rule.value.value)
             .map(rule => rule.toSource())

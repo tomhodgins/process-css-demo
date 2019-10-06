@@ -1,6 +1,6 @@
 const parseCSS = require('../lib/parse-css.js')
 const pattern = require('apophany/index.cjs.js')
-const parent = require('jsincss-parent-selector')
+const first = require('jsincss-first-selector')
 
 module.exports = function(string = '', environment = {}) {
   return parseCSS.parseAStylesheet(string).value.reduce(
@@ -8,9 +8,8 @@ module.exports = function(string = '', environment = {}) {
       const match = pattern(
         rule.prelude,
         [
-          ({tokenType, value}) => tokenType === 'DELIM' && value === '/',
-          ({tokenType, value}) => tokenType === 'IDENT' && value === '--parent',
-          ({tokenType, value}) => tokenType === 'DELIM' && value === '/'
+          ({tokenType}) => tokenType === ':',
+          ({tokenType, value}) => tokenType === 'IDENT' && value === '--first'
         ]
       )
 
@@ -20,10 +19,10 @@ module.exports = function(string = '', environment = {}) {
       ) {
 
         // Add dependencies to output
-        output.otherFiles['parentCombinator'] = parent.toString()
+        output.otherFiles['firstMatchSelector'] = first.toString()
 
         // Add rules to output JS
-        output.js += `parentCombinator(${
+        output.js += `firstMatchSelector(${
           JSON.stringify(
             rule.prelude
               .slice(0, match.start)

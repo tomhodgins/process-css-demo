@@ -1,0 +1,7 @@
+li:--xpath('parent::*') {
+  background: lime;
+}
+
+:root:--xpath('//\*') {
+  border: 1px solid red;
+}

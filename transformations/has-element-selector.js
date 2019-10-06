@@ -1,4 +1,5 @@
 const parseCSS = require('../lib/parse-css.js')
+const pattern = require('apophany/index.cjs.js')
 
 function has(selector, child, rule) {
   const attr = (selector + child).replace(/\W/g, '')
@@ -17,46 +18,46 @@ function has(selector, child, rule) {
 module.exports = function(string = '', environment = {}) {
   return parseCSS.parseAStylesheet(string).value.reduce(
     (output, rule) => {
+      const match = pattern(
+        rule.prelude,
+        [
+          ({tokenType}) => tokenType === ':',
+          ({type, name}) => type === 'FUNCTION' && name === '--has'
+        ]
+      )
+
       if (
         rule.type === 'QUALIFIED-RULE'
-        && rule.prelude.find((token, index, list) => 
-          token.tokenType === ':'
-            && list[index + 1]
-            && list[index + 1].type === 'FUNCTION'
-            && list[index + 1].name === '--has'
-        )
+        && match.start >= 0
       ) {
-        // Index of custom selector
-        let customSelector = rule.prelude.findIndex((token, index, list) =>
-          token.tokenType === ':'
-            && list[index + 1]
-            && list[index + 1].type === 'FUNCTION'
-            && list[index + 1].name === '--has'
-        )
-
-        // Extract selector
-        const selector = rule.prelude.slice(0, customSelector)
-          .map(token => token.toSource())
-          .join('')
-          .trim()
-
-        const child = rule.prelude[customSelector + 1].value
-          .map(token => token.toSource())
-          .join('')
 
         // Add dependencies to output
         output.otherFiles['hasElementSelector'] = has.toString()
 
         // Add rules to output JS
         output.js += `hasElementSelector(${
-          JSON.stringify(selector || '*')
+          JSON.stringify(
+            rule.prelude
+              .slice(0, match.start)
+              .map(token => token.toSource())
+              .join('')
+              .trim()
+            || '*'
+          )
         }, ${
-          JSON.stringify(child)
+          JSON.stringify(
+            rule.prelude[match.start + 1]
+              .value
+              .map(token => token.toSource())
+              .join('')
+              .trim()
+          )
         }, ${
           JSON.stringify(
             rule.value.value
               .map(token => token.toSource())
               .join('')
+              .trim()
           )
         }),`
       } else {

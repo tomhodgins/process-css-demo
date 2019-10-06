@@ -1,38 +1,35 @@
 const parseCSS = require('../lib/parse-css.js')
+const pattern = require('apophany/index.cjs.js')
 const overflow = require('jsincss-overflow')
 
 module.exports = function(string = '', environment = {}) {
   return parseCSS.parseAStylesheet(string).value.reduce(
-    // :--overflowed()
     (output, rule) => {
+      const match = pattern(
+        rule.prelude,
+        [
+          ({tokenType}) => tokenType === ':',
+          ({type, name}) => type === 'FUNCTION' && name === '--overflowed',
+        ]
+      )
+
       if (
         rule.type === 'QUALIFIED-RULE'
-        && rule.prelude.find((token, index, list) => 
-          token.tokenType === ':'
-            && list[index + 1]
-            && list[index + 1].type === 'FUNCTION'
-            && list[index + 1].name === '--overflowed'
-        )
+        && match.start >= 0
       ) {
-        // Index of custom selector
-        let customSelector = rule.prelude.findIndex((token, index, list) =>
-          token.tokenType === ':'
-            && list[index + 1]
-            && list[index + 1].type === 'FUNCTION'
-            && list[index + 1].name === '--overflowed'
-        )
-
-        // Extract selector
-        const selector = rule.prelude.slice(0, customSelector)
+        const selector = rule.prelude
+          .slice(0, match.start)
           .map(token => token.toSource())
           .join('')
           .trim()
+          || '*'
 
-        const descendants = rule.prelude.slice(customSelector + 2)
+        const descendants = rule.prelude
+          .slice(match.end + 1)
           .map(token => token.toSource())
           .join('')
 
-        const conditions = `[${rule.prelude[customSelector + 1].value.map(token => 
+        const conditions = `[${rule.prelude[match.start + 1].value.map(token => 
           token.tokenType === 'IDENT'
             ? `"${token.toSource()}"`
             : token.toSource()
@@ -46,8 +43,10 @@ module.exports = function(string = '', environment = {}) {
           JSON.stringify(selector)
         }, ${
           conditions
-        }, \`${selector}:self${descendants}{${
-          rule.value.value.map(token => token.toSource()).join('')
+        }, \`${selector}:self${descendants} {${
+          rule.value.value
+            .map(token => token.toSource())
+            .join('')
         }}\`),`
       } else {
         output.css += rule.toSource()
