@@ -55,7 +55,7 @@ module.exports = function(string = '', environment = {}) {
               .map(token => token.toSource())
               .join('')
               .trim()
-            || '*'
+            || ':root'
           )
         }, ${
           rule.prelude[match.start + 1]
