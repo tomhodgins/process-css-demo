@@ -3,6 +3,7 @@ const elementQueryAtRule = require('./transformations/element-query-at-rule')
 const documentAtRule = require('./transformations/document-at-rule')
 const variationAtRule = require('./transformations/variation-at-rule')
 const importantAtRule = require('./transformations/important-at-rule')
+const rewriteSelectorAtRule = require('./transformations/rewrite-selector-at-rule')
 const hasElementSelector = require('./transformations/has-element-selector')
 const parentCombinator = require('./transformations/parent-combinator')
 const elderSiblingCombinator = require('./transformations/elder-sibling-combinator')
@@ -37,6 +38,9 @@ module.exports = [
 
     // @--important { stylesheet }
     importantAtRule,
+
+    // @--rewrite-selector function(string) { stylesheet }
+    rewriteSelectorAtRule,
 
   // Custom selectors
 
