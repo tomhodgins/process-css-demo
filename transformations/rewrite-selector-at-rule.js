@@ -1,5 +1,4 @@
 const parseCSS = require('../lib/parse-css.js')
-// const pattern = require('apophany/index.cjs.js')
 
 const features = {
   prefix: (selector, string) => `${string}${selector}`,
@@ -43,10 +42,12 @@ module.exports = function(string = '', environment = {}) {
               )
             } else {
               childRule.prelude = parseCSS.parseAListOfComponentValues(
-                features[condition.name](
-                  childRule.prelude.map(token => token.toSource()).join('').trim(),
-                  condition.value.map(token => token.toSource()).join('')
-                )
+                parseCSS.parseACommaSeparatedListOfComponentValues(childRule.prelude).map(selector =>
+                  features[condition.name](
+                    selector.map(token => token.toSource()).join('').trim(),
+                    condition.value.map(token => token.toSource()).join('')
+                  )
+                ).join(',')
               )
             }
           })
