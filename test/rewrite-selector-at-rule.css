@@ -1,0 +1,14 @@
+@--rewrite-selector prefix(.a) {
+  .a, .b, .c {}
+}
+@--rewrite-selector suffix(.b) {
+  .a, .b, .c {}
+}
+@--rewrite-selector replace('^\\.(\\w+)$', '[class~="$1"]') {
+  .a, .b, .c {}
+}
+@--rewrite-selector prefix(.a) {
+  @media (min-width: 500px) {
+    .a, .b, .c {}
+  }
+}

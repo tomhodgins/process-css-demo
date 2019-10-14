@@ -177,7 +177,7 @@ if (
         .then(result => console.log(result.css))
     } else {
 
-      console.log(processed.css)
+      console.log(processed.css.trim())
     }
 
   } else {
