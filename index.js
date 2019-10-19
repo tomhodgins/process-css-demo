@@ -16,6 +16,7 @@ const transformations = require('./transformations.js')
 const options = {
   file: '',
   css: false,
+  js: false,
   data: null,
   minify: false,
   beautify: false,
@@ -30,12 +31,19 @@ process.argv.slice(2).forEach((arg, index, list) => {
     options.file = arg
   }
 
-  // -c or --css to select CSS output
+  // -c or --css to select CSS-only output
   if (
     ['-c', '--css'].some(term => term === arg)
   ) {
     options.css = true
   }
+
+    // -j or --js to select JavaScript-only output
+    if (
+      ['-j', '--js'].some(term => term === arg)
+    ) {
+      options.js = true
+    }
 
   // -d or --data to specify JSON-parsable string of data
   if (
@@ -87,6 +95,7 @@ Usage:
 Options:
 
 -c, --css         output CSS only
+-j, --js          output JS only
 -m, --minify      enable code minification
 -b, --beautify    enable code beautification
 -d, --data        supply data to preprocessor as JSON-parsable string
@@ -198,7 +207,8 @@ if (
           : ''
       }) => {
         ${
-          processed.css.length
+          options.js === false
+          && processed.css.length
             ? `document.documentElement.appendChild(document.createElement('style')).textContent = \`${processed.css}\`;`
             : ''
         }
