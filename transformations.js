@@ -3,6 +3,8 @@ const elementQueryAtRule = require('./transformations/element-query-at-rule')
 const documentAtRule = require('./transformations/document-at-rule')
 const variationAtRule = require('./transformations/variation-at-rule')
 const importantAtRule = require('./transformations/important-at-rule')
+const minWidthAtRule = require('./transformations/min-width-at-rule')
+const maxWidthAtRule = require('./transformations/max-width-at-rule')
 const rewriteSelectorAtRule = require('./transformations/rewrite-selector-at-rule')
 const hasElementSelector = require('./transformations/has-element-selector')
 const parentCombinator = require('./transformations/parent-combinator')
@@ -38,6 +40,12 @@ module.exports = [
 
     // @--important { stylesheet }
     importantAtRule,
+
+    // @--min-width <dimension> { stylesheet }
+    minWidthAtRule,
+
+    // @--max-width <dimension> { stylesheet }
+    maxWidthAtRule,
 
     // @--rewrite-selector function(string) { stylesheet }
     rewriteSelectorAtRule,

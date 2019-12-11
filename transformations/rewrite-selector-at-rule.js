@@ -40,7 +40,7 @@ module.exports = function(string = '', environment = {}) {
           }
 
           function processSelectors(current) {
-             // process selectors based on conditions
+            // process selectors based on conditions
             conditions.forEach(condition => {
               if (condition.name === 'replace') {
                 current.prelude = parseCSS.parseAListOfComponentValues(

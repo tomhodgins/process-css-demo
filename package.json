@@ -22,6 +22,10 @@
   ],
   "author": "Tommy Hodgins",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomhodgins/process-css-demo/issues"
+  },
+  "homepage": "https://github.com/tomhodgins/process-css-demo#readme",
   "dependencies": {
     "apophany": "0.0.2",
     "cssnano": "^4.1.10",

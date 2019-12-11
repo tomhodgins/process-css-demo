@@ -1,5 +1,7 @@
 # process-css-demo
 
+[![Run on Repl.it](https://repl.it/badge/github/tomhodgins/process-css-demo)](https://repl.it/github/tomhodgins/process-css-demo)
+
 A demo of [process-css](https://github.com/tomhodgins/process-css) set up as a Node-based CSS preprocessor for supporting custom at-rules, custom selectors, custom properties, custom functions, and custom units.
 
 ## What is it?

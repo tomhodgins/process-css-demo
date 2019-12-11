@@ -22,7 +22,7 @@ module.exports = function(string = '', environment = {}) {
           .map(token => token.toSource())
           .join('')
           .trim()
-          || '*'
+        || '*'
 
         const descendants = rule.prelude
           .slice(match.end + 1)
