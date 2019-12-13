@@ -32,11 +32,13 @@ module.exports = function(string = '', environment = {}) {
             || '*'
           )
         }, ${
-          rule.prelude[match.start + 1]
-            .value
-            .map(token => token.toSource())
-            .join('')
-            .trim()
+          JSON.stringify(
+            rule.prelude[match.start + 1]
+              .value
+              .map(token => token.toSource())
+              .join('')
+              .trim()
+          )
         }, ${
           JSON.stringify(
             rule.value.value
