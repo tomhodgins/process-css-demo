@@ -20,6 +20,7 @@ const overflowedContentSelector = require('./transformations/overflowed-content-
 const clampedFontSizeProperty = require('./transformations/clamped-font-size-property')
 const base64EncodeFunction = require('./transformations/base64-encode-function')
 const svgEncodeFunction = require('./transformations/svg-encode-function')
+const mimicFunction = require('./transformations/mimic-function')
 const elementPercentageUnits = require('./transformations/element-percentage-units')
 const scrollPercentageUnits = require('./transformations/scroll-percentage-units')
 
@@ -97,6 +98,9 @@ module.exports = [
 
     // --svg-encode(string)
     svgEncodeFunction,
+
+    // --mimic(selector)
+    mimicFunction,
 
   // Custom units
 

@@ -1,0 +1,7 @@
+h1 {
+  font-size: 1in;
+}
+h2 {
+  font-family: --mimic(h1);
+  font-size: --mimic(h1);
+}

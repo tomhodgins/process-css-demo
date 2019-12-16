@@ -8,7 +8,7 @@ A demo of [process-css](https://github.com/tomhodgins/process-css) set up as a N
 
 This project is a Node script that can be run to process CSS stylesheet files, or strings of CSS into either CSS output, or JavaScript output containing your styles plus any runtimes and plugins necessary to support the features you have used.
 
-If you were interested in processing vanilla CSS, or wanted to see a demo of some ways CSS can be transformed, this project serves to be a basic example of how you can use [process-css-demo](https://github.com/tomhodgins/process-css) to process CSS either as a command-line utility, or how you can build CSS preprocessing into a larger codebase.
+If you were interested in processing vanilla CSS, or wanted to see a demo of some ways CSS can be transformed, this project serves to be a basic example of how you can use [process-css](https://github.com/tomhodgins/process-css) to process CSS either as a command-line utility, or how you can build CSS preprocessing into a larger codebase.
 
 ## What does it do?
 
