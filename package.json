@@ -1,6 +1,6 @@
 {
   "name": "process-css-demo",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "A demo of process-css for processing CSS",
   "main": "index.js",
   "bin": {
