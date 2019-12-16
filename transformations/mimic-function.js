@@ -2,12 +2,17 @@ const fs = require('fs')
 const parseCSS = require('../lib/parse-css.js')
 
 function mimicFunction(selector, target, property) {
-  return `
-    ${selector} {
-      ${property}: ${
-        window.getComputedStyle(document.querySelector(target)).getPropertyValue(property)
-      };
-    }`
+  var tag = document.querySelector(target)
+
+  return tag
+    ? `
+      ${selector} {
+        ${property}: ${
+          window.getComputedStyle(tag).getPropertyValue(property)
+        };
+      }
+    `
+    : ''
 }
 
 module.exports = function(string = '', environment = {}) {
