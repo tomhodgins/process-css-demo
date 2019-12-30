@@ -1,7 +1,7 @@
 module.exports = [
 
   // Nesting
-  require('./transformations/base64-encode-function'),
+  require('./transformations/property-nesting'),
 
   // Custom functions
 
