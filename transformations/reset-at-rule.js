@@ -1,4 +1,4 @@
-const parseCSS = require('../lib/parse-css')
+const parseCSS = require('../lib/parse-css/index.cjs.js')
 
 module.exports = function(string = '', environment = {}) {
   return parseCSS.parseAStylesheet(string).value.reduce(
@@ -7,13 +7,17 @@ module.exports = function(string = '', environment = {}) {
         rule.type === 'AT-RULE'
         && rule.name === '--reset'
         ) {
-        let selector = '*'
+          let selector = '*'
 
-        if (rule.prelude.length) {
-          let part = rule.prelude.map(token => token.toSource()).join('').trim()
-
-          selector = `${part}, ${part} *`
-        }
+          if (rule.prelude.length) {
+            selector = parseCSS.parseACommaSeparatedListOfComponentValues(
+              rule.prelude.map(token => token.toSource()).join('')
+            ).map(part => {
+              part = part.map(token => token.toSource()).join('')
+              return `${part}, ${part} *`
+            }
+            ).join(', ')
+          }    
 
         // Output reset rule to CSS
         output.css += `

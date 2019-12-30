@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// dependencies
+// Dependencies
 const fs = require('fs')
 const path = require('path')
 const processCSS = require('process-css')
@@ -10,7 +10,7 @@ const postcss = require('postcss')
 const cssnano = require('cssnano')
 const terser = require('terser')
 
-// our CSS transformations
+// Our CSS transformations
 const transformations = require('./transformations.js')
 
 const options = {
@@ -158,10 +158,8 @@ if (
   && (
     processed
     && (
-      processed.css
-      && processed.css.length
-      || processed.js
-      && processed.js.length
+      processed.css && processed.css.length
+      || processed.js && processed.js.length
     )
   )
 ) {

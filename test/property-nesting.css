@@ -1,0 +1,22 @@
+a {
+  color: red;
+  ---\ b: {
+    color: green;
+    ---\ c: {
+      color: blue;
+    };
+  };
+}
+@media (min-width: 1px) {
+  @media (min-height: 2px) {
+    d {
+      color: cyan;
+      ---\:hover: {
+        color: magenta;
+      };
+      ---\:active: {
+        color: yellow;
+      };
+    }
+  }
+}

@@ -3,3 +3,9 @@
     background: lime;
   }
 }
+
+@--element input and (min-characters: 140) {
+  :--self {
+    background: red;
+  }
+}

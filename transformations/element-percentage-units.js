@@ -1,4 +1,4 @@
-const parseCSS = require('../lib/parse-css.js')
+const parseCSS = require('../lib/parse-css/index.cjs.js')
 const eunits = require('jsincss-element-units')
 
 module.exports = function(string = '', environment = {}) {

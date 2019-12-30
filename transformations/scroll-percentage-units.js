@@ -1,4 +1,4 @@
-const parseCSS = require('../lib/parse-css.js')
+const parseCSS = require('../lib/parse-css/index.cjs.js')
 
 // --sw, --sh
 function scrollPercentageUnits(selector, rule) {

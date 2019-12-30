@@ -1,4 +1,4 @@
-const parseCSS = require('../lib/parse-css.js')
+const parseCSS = require('../lib/parse-css/index.cjs.js')
 const pattern = require('apophany/index.cjs.js')
 
 function xpath(selector, path, rule) {

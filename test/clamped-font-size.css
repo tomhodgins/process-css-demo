@@ -1,3 +1,6 @@
 h1 {
   --clamped-font-size: 20, 8, 60;
 }
+h2 {
+  --clamped-font-size: 0, 10, Infinity;
+}

@@ -1,4 +1,4 @@
-const parseCSS = require('../lib/parse-css.js')
+const parseCSS = require('../lib/parse-css/index.cjs.js')
 
 function documentAtRule(conditions, stylesheet) {
   var features = {
@@ -39,9 +39,12 @@ module.exports = function(string = '', environment = {}) {
           && ['url', 'url-prefix', 'domain', 'regexp'].some(term => term === name)
         ).map(({name, value}) => {
           const condition = {}
-          condition[kebabToCamel(name)] = value
-            .map(token => JSON.parse(token.toSource()))
-            .join('')
+          //condition[kebabToCamel(name)] = value[0].value
+          condition[kebabToCamel(name)] = value.map(({tokenType, value}) =>
+              tokenType === 'STRING'
+                ? JSON.parse(JSON.stringify(value))
+                : value
+            ).join('')
           return condition
         })
 

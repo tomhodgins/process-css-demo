@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/tomhodgins/process-css-demo#readme",
   "dependencies": {
+    "anesthetic": "^0.3.1",
     "apophany": "0.0.2",
     "cssnano": "^4.1.10",
     "jsincss": "^2.2.2",

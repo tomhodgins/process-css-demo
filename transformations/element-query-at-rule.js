@@ -1,4 +1,4 @@
-const parseCSS = require('../lib/parse-css.js')
+const parseCSS = require('../lib/parse-css/index.cjs.js')
 const element = require('jsincss-element-query')
 
 module.exports = function(string = '', environment = {}) {

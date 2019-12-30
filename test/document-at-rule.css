@@ -1,5 +1,20 @@
-@--document regexp(staticresource) {
+@--document regexp('process-css-demo') {
   :root {
-    background: lime;
+    background: cyan;
+  }
+}
+@--document url('https://github.com/tomhodgins/process-css-demo') {
+  :root {
+    background: magenta;
+  }
+}
+@--document url-prefix('https://github.com/tomhodgins') {
+  :root {
+    background: yellow;
+  }
+}
+@--document domain('github.com') {
+  :root {
+    background: black;
   }
 }

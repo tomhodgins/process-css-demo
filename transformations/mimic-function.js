@@ -1,5 +1,5 @@
 const fs = require('fs')
-const parseCSS = require('../lib/parse-css.js')
+const parseCSS = require('../lib/parse-css/index.cjs.js')
 
 function mimicFunction(selector, target, property) {
   var tag = document.querySelector(target)
@@ -18,9 +18,6 @@ function mimicFunction(selector, target, property) {
 module.exports = function(string = '', environment = {}) {
   return parseCSS.parseAStylesheet(string).value.reduce(
     (output, rule) => {
-
-
-
       if (
         rule.type === 'QUALIFIED-RULE'
         && rule.value.value.filter(

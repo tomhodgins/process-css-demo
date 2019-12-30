@@ -1,4 +1,4 @@
-const parseCSS = require('../lib/parse-css.js')
+const parseCSS = require('../lib/parse-css/index.cjs.js')
 
 function clampedFontSizeProperty(selector, min, mid, max) {
   min = min || 12;

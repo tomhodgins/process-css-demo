@@ -1,3 +1,12 @@
 h1 {
   font-size: 10--ew;
 }
+h2 {
+  font-size: 10--eh;
+}
+h3 {
+  font-size: 10--emin;
+}
+h4 {
+  font-size: 100--emax;
+}
