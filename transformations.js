@@ -87,4 +87,10 @@ module.exports = [
 
     // 1--sw 2--sh
     require('./transformations/scroll-percentage-units'),
+
+  // Custom annotations
+
+    // !--immutable
+    require('./transformations/immutable-annotation'),
+
 ]

@@ -1,0 +1,9 @@
+h1 {
+  color: lime !--immutable;
+}
+h1 {
+  color: red !--immutable;
+}
+h1 {
+  color: red !important;
+}
