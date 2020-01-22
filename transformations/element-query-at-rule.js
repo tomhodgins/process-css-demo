@@ -42,10 +42,12 @@ module.exports = function(string = '', environment = {}) {
                   .join('')
                   .trim()
                 )
-            ] = value.slice(colon + 1, value.length)
-              .map(token => token.toSource())
-              .join('')
-              .trim()
+            ] = JSON.parse(
+              value.slice(colon + 1, value.length)
+                .map(token => token.toSource())
+                .join('')
+                .trim()
+            )
 
             return query.conditions
           })
