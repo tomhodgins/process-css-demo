@@ -2,7 +2,7 @@
 custom-element-name {
   color: red;
 }
-:--tag-name(^ custom-) {
+:--tag-name(^ custom-):hover {
   background: lime;
 }
 :--tag-name(* -element-) {

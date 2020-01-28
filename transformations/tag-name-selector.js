@@ -11,7 +11,12 @@ function tagNameSelector(selector, method, string, rule) {
   const selectors = Array.from(document.querySelectorAll('*')).reduce(
     (set, tag) => {
       if (features[method](tag.tagName, string)) {
-        set.add(tag.tagName.toLowerCase())
+        set.add(
+          selector.replace(
+            new RegExp(`:--tag-name\\(\\${method}\\s+${string}\\)`),
+            tag.tagName.toLowerCase()
+          )
+        )
       }
       return set
     },
@@ -19,10 +24,7 @@ function tagNameSelector(selector, method, string, rule) {
   )
 
   return `${
-    selector.replace(
-      new RegExp(`:--tag-name\\(\\${method}\\s+${string}\\)`),
-      Array.from(selectors).join(', ').toLowerCase()
-    )
+    Array.from(selectors).join(', ')
   } { ${rule} }`
 }
 
