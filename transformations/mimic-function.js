@@ -1,4 +1,3 @@
-const fs = require('fs')
 const parseCSS = require('../lib/parse-css/index.cjs.js')
 
 function mimicFunction(selector, target, property) {

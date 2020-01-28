@@ -1,0 +1,13 @@
+/* for matching <custom-element-name> */
+custom-element-name {
+  color: red;
+}
+:--tag-name(^ custom-) {
+  background: lime;
+}
+:--tag-name(* -element-) {
+  border: 5px dashed rgb(218, 186, 218);
+}
+:--tag-name($ -name) {
+  text-shadow: yellow .3em .3em 0;
+}

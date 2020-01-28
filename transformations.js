@@ -75,6 +75,9 @@ module.exports = [
     // a:--overflowed(list) {}
     require('./transformations/overflowed-content-selector'),
 
+    // a:--tag-name(<symbol> string) {}
+    require('./transformations/tag-name-selector'),
+
   // Custom properties
 
     // --clamped-font-size: minimum, scaling factor, max;

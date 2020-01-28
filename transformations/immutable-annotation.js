@@ -7,7 +7,7 @@ function immutableAnnotation(selector = '', property = '', value = '') {
 
   if (document.documentElement.dataset.childWatcher !== 'watching') {
     processChildren([{
-      addedNodes: Array.from(document.querySelectorAll('*'))
+      addedNodes: document.querySelectorAll('*')
     }])
     childWatcher.observe(document.documentElement, {
       childList: true,
@@ -77,7 +77,7 @@ function immutableAnnotation(selector = '', property = '', value = '') {
   })
 
   processChildren([
-    {addedNodes: Array.from(document.querySelectorAll(selector))
+    {addedNodes: document.querySelectorAll(selector)
   }])
 }
 
@@ -133,8 +133,7 @@ module.exports = function(string = '', environment = {}) {
     {
       css: '',
       js: '',
-      otherFiles: {},
-      annotations: {}
+      otherFiles: {}
     }
   )
 
