@@ -40,6 +40,9 @@ module.exports = [
     // @--rewrite-selector function(string) { stylesheet }
     require('./transformations/rewrite-selector-at-rule'),
 
+    // @--custom-unit { declaration list }
+    require('./transformations/custom-units-at-rule.js'),
+
   // Custom selectors
 
     // a /--parent/ {}

@@ -1,0 +1,8 @@
+@--custom-units {
+  --inch: 2.54cm;
+}
+
+.demo {
+  width: 1--inch;
+  height: 2--inch;
+}
