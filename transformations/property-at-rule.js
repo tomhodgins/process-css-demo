@@ -54,11 +54,13 @@ module.exports = function(string = '', environment = {}) {
                 )
               )
             },
-            initialValue: "${
-              stringify(
-                properties.find(({name}) => name === 'initial-value').value
+            initialValue: ${
+              JSON.stringify(
+                stringify(
+                  properties.find(({name}) => name === 'initial-value').value
+                )
               )
-            }"
+            }
           })`
         }
       } else {

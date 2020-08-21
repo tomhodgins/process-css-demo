@@ -1,7 +1,7 @@
 @--property --color {
   syntax: "<color>";
   inherits: false;
-  initial-value: red;
+  initial-value: 'true';
 }
 
 :root {
