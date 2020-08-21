@@ -43,6 +43,9 @@ module.exports = [
     // @--custom-unit { declaration list }
     require('./transformations/custom-units-at-rule.js'),
 
+    // @--property --name { declaration list }
+    require('./transformations/property-at-rule.js'),
+
   // Custom selectors
 
     // a /--parent/ {}
