@@ -39,14 +39,14 @@ module.exports = function(string = '', environment = {}) {
           output.otherFiles['tryToRegisterCustomProperty'] = tryToRegisterCustomProperty.toString()
 
           output.js += `tryToRegisterCustomProperty({
-            name: '${
+            name: "${
               stringify(rule.prelude)
-            }',
-            syntax: '${
+            }",
+            syntax: ${
               stringify(
                 properties.find(({name}) => name === 'syntax').value
               )
-            }',
+            },
             inherits: ${
               Boolean(
                 stringify(
@@ -54,11 +54,11 @@ module.exports = function(string = '', environment = {}) {
                 )
               )
             },
-            initialValue: '${
+            initialValue: "${
               stringify(
                 properties.find(({name}) => name === 'initial-value').value
               )
-            }'
+            }"
           })`
         }
       } else {

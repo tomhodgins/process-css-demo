@@ -1,5 +1,5 @@
 @--property --color {
-  syntax: <color>;
+  syntax: "<color>";
   inherits: false;
   initial-value: red;
 }
