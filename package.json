@@ -43,7 +43,7 @@
     "jsincss-regex-match": "^2.2.0",
     "jsincss-string-match": "^2.1.0",
     "path": "^0.12.7",
-    "postcss": "^7.0.26",
+    "postcss": "^8.2.10",
     "prettier": "^1.19.1",
     "process-css": "^0.2.1",
     "terser": "^4.6.3"
